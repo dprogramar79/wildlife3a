@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rivers",
+  "info": {
+    "singularName": "river",
+    "pluralName": "rivers",
+    "displayName": "River",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "Description": {
+      "type": "text",
+      "required": true
+    },
+    "national_park": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::national-park.national-park",
+      "inversedBy": "rivers"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "enquiries",
+  "info": {
+    "singularName": "enquiry",
+    "pluralName": "enquiries",
+    "displayName": "Enquiry",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "created": {
+      "type": "datetime"
+    },
+    "updated": {
+      "type": "datetime"
+    },
+    "lastFollowed": {
+      "type": "datetime"
+    },
+    "statusOfEnquiry": {
+      "type": "enumeration",
+      "enum": [
+        "active",
+        "non acive"
+      ],
+      "required": true,
+      "default": "active"
+    },
+    "enquiryCode": {
+      "type": "string",
+      "required": true
+    },
+    "message": {
+      "type": "string",
+      "required": true
+    },
+    "enquiryFor": {
+      "type": "enumeration",
+      "enum": [
+        "Safari Package",
+        "National Park"
+      ],
+      "required": true
+    }
+  }
+}

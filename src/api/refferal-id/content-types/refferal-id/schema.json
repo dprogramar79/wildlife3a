@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "refferal_ids",
+  "info": {
+    "singularName": "refferal-id",
+    "pluralName": "refferal-ids",
+    "displayName": "Refferal",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "myReferral": {
+      "type": "json"
+    },
+    "myReferralCount": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}
