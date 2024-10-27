@@ -86,10 +86,6 @@
     "activeEnquiry": {
       "type": "json"
     },
-    "address": {
-      "type": "json",
-      "required": true
-    },
     "fullName": {
       "type": "string"
     },
@@ -130,11 +126,6 @@
         "West Bengal"
       ]
     },
-    "refferal": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::refferal-id.refferal-id"
-    },
     "referredFrom": {
       "type": "string"
     },
@@ -142,6 +133,15 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::refferal-id.refferal-id"
+    },
+    "address": {
+      "type": "richtext",
+      "required": true
+    },
+    "enquiries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::enquiry.enquiry"
     }
   }
 }

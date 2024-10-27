@@ -475,7 +475,6 @@ export interface PluginUsersPermissionsUser
     mobileNumber: Schema.Attribute.BigInteger;
     pincode: Schema.Attribute.BigInteger;
     activeEnquiry: Schema.Attribute.JSON;
-    address: Schema.Attribute.JSON & Schema.Attribute.Required;
     fullName: Schema.Attribute.String;
     likedPackage: Schema.Attribute.JSON;
     state: Schema.Attribute.Enumeration<
@@ -511,15 +510,13 @@ export interface PluginUsersPermissionsUser
         'West Bengal',
       ]
     >;
-    refferal: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::refferal-id.refferal-id'
-    >;
     referredFrom: Schema.Attribute.String;
     refferals: Schema.Attribute.Relation<
       'oneToMany',
       'api::refferal-id.refferal-id'
     >;
+    address: Schema.Attribute.RichText & Schema.Attribute.Required;
+    enquiries: Schema.Attribute.Relation<'oneToMany', 'api::enquiry.enquiry'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -776,20 +773,6 @@ export interface ApiPackagePackage extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    day1: Schema.Attribute.JSON &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    day2: Schema.Attribute.JSON &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     image2: Schema.Attribute.Media<'images' | 'files', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -825,19 +808,6 @@ export interface ApiPackagePackage extends Struct.CollectionTypeSchema {
         };
       }>;
     rivers: Schema.Attribute.Relation<'oneToMany', 'api::river.river'>;
-    day3: Schema.Attribute.JSON &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    day4: Schema.Attribute.JSON &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     rating: Schema.Attribute.Decimal &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -895,6 +865,38 @@ export interface ApiPackagePackage extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::term-condition.term-condition'
     >;
+    day1: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'Number of Rooms : 2 Room Type(s): Deluxe Meals: Yes Number of Nights: 4(14/03/2024 to 18/03/2024)'>;
+    day2: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'Number of Rooms : 2 Room Type(s): Deluxe Meals: Yes Number of Nights: 4(14/03/2024 to 18/03/2024)'>;
+    day3: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'Number of Rooms : 2 Room Type(s): Deluxe Meals: Yes Number of Nights: 4(14/03/2024 to 18/03/2024)'>;
+    day4: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'Number of Rooms : 2 Room Type(s): Deluxe Meals: Yes Number of Nights: 4(14/03/2024 to 18/03/2024)'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
