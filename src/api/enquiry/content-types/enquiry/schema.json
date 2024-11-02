@@ -45,6 +45,12 @@
         "National Park"
       ],
       "required": true
+    },
+    "holiday_package": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::holiday-package.holiday-package",
+      "inversedBy": "enquiries"
     }
   }
 }

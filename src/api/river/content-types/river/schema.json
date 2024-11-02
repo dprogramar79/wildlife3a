@@ -26,6 +26,12 @@
       "relation": "manyToOne",
       "target": "api::national-park.national-park",
       "inversedBy": "rivers"
+    },
+    "holiday_package": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::holiday-package.holiday-package",
+      "inversedBy": "rivers"
     }
   }
 }

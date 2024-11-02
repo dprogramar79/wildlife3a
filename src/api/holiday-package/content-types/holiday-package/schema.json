@@ -1,0 +1,150 @@
+{
+  "kind": "collectionType",
+  "collectionName": "holiday_packages",
+  "info": {
+    "singularName": "holiday-package",
+    "pluralName": "holiday-packages",
+    "displayName": "Holiday Package",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "datetime": {
+      "type": "datetime"
+    },
+    "holidaysSite": {
+      "type": "string",
+      "required": true
+    },
+    "longitude": {
+      "type": "decimal"
+    },
+    "latitude": {
+      "type": "decimal"
+    },
+    "image": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "image2": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "location": {
+      "type": "string",
+      "required": true
+    },
+    "month": {
+      "type": "enumeration",
+      "enum": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ]
+    },
+    "rivers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::river.river",
+      "mappedBy": "holiday_package"
+    },
+    "rating": {
+      "type": "integer"
+    },
+    "season": {
+      "type": "enumeration",
+      "enum": [
+        "Winter",
+        "Spring",
+        "Summer",
+        "Monsoon",
+        "Autumn"
+      ]
+    },
+    "state": {
+      "type": "enumeration",
+      "enum": [
+        "Andhra Pradesh",
+        "Arunachal Pradesh",
+        "Assam",
+        "Bihar",
+        "Chhattisgarh",
+        "Goa",
+        "Gujarat",
+        "Haryana",
+        "Himachal Pradesh",
+        "Jamu Kashmir",
+        "Jharkhand",
+        "Karnataka",
+        "Kerala",
+        "Madhya Pradesh",
+        "Maharashtra",
+        "Manipur",
+        "Meghalaya",
+        "Mizoram",
+        "Nagaland",
+        "Odisha",
+        "Punjab",
+        "Rajasthan",
+        "Sikkim",
+        "Tamil Nadu",
+        "Telangana",
+        "Tripura",
+        "Uttar Pradesh",
+        "Uttarakhand",
+        "West Bengal"
+      ]
+    },
+    "enquiries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::enquiry.enquiry",
+      "mappedBy": "holiday_package"
+    },
+    "termCondition": {
+      "type": "blocks"
+    },
+    "day1": {
+      "type": "richtext"
+    },
+    "day2": {
+      "type": "richtext"
+    },
+    "day3": {
+      "type": "richtext"
+    },
+    "day4": {
+      "type": "richtext"
+    }
+  }
+}

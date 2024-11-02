@@ -532,6 +532,37 @@ export interface PluginUsersPermissionsUser
   };
 }
 
+export interface ApiContactUsContactUs extends Struct.CollectionTypeSchema {
+  collectionName: 'contact_uses';
+  info: {
+    singularName: 'contact-us';
+    pluralName: 'contact-uses';
+    displayName: 'Contact Us';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String;
+    message: Schema.Attribute.Text;
+    email: Schema.Attribute.Email;
+    phoneNumber: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::contact-us.contact-us'
+    >;
+  };
+}
+
 export interface ApiEnquiryEnquiry extends Struct.CollectionTypeSchema {
   collectionName: 'enquiries';
   info: {
@@ -556,6 +587,10 @@ export interface ApiEnquiryEnquiry extends Struct.CollectionTypeSchema {
       ['Safari Package', 'National Park']
     > &
       Schema.Attribute.Required;
+    holiday_package: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::holiday-package.holiday-package'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -567,6 +602,108 @@ export interface ApiEnquiryEnquiry extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::enquiry.enquiry'
+    >;
+  };
+}
+
+export interface ApiHolidayPackageHolidayPackage
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'holiday_packages';
+  info: {
+    singularName: 'holiday-package';
+    pluralName: 'holiday-packages';
+    displayName: 'Holiday Package';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    datetime: Schema.Attribute.DateTime;
+    holidaysSite: Schema.Attribute.String & Schema.Attribute.Required;
+    longitude: Schema.Attribute.Decimal;
+    latitude: Schema.Attribute.Decimal;
+    image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    image2: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    location: Schema.Attribute.String & Schema.Attribute.Required;
+    month: Schema.Attribute.Enumeration<
+      [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ]
+    >;
+    rivers: Schema.Attribute.Relation<'oneToMany', 'api::river.river'>;
+    rating: Schema.Attribute.Integer;
+    season: Schema.Attribute.Enumeration<
+      ['Winter', 'Spring', 'Summer', 'Monsoon', 'Autumn']
+    >;
+    state: Schema.Attribute.Enumeration<
+      [
+        'Andhra Pradesh',
+        'Arunachal Pradesh',
+        'Assam',
+        'Bihar',
+        'Chhattisgarh',
+        'Goa',
+        'Gujarat',
+        'Haryana',
+        'Himachal Pradesh',
+        'Jamu Kashmir',
+        'Jharkhand',
+        'Karnataka',
+        'Kerala',
+        'Madhya Pradesh',
+        'Maharashtra',
+        'Manipur',
+        'Meghalaya',
+        'Mizoram',
+        'Nagaland',
+        'Odisha',
+        'Punjab',
+        'Rajasthan',
+        'Sikkim',
+        'Tamil Nadu',
+        'Telangana',
+        'Tripura',
+        'Uttar Pradesh',
+        'Uttarakhand',
+        'West Bengal',
+      ]
+    >;
+    enquiries: Schema.Attribute.Relation<'oneToMany', 'api::enquiry.enquiry'>;
+    termCondition: Schema.Attribute.Blocks;
+    day1: Schema.Attribute.RichText;
+    day2: Schema.Attribute.RichText;
+    day3: Schema.Attribute.RichText;
+    day4: Schema.Attribute.RichText;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::holiday-package.holiday-package'
     >;
   };
 }
@@ -960,6 +1097,10 @@ export interface ApiRiverRiver extends Struct.CollectionTypeSchema {
     national_park: Schema.Attribute.Relation<
       'manyToOne',
       'api::national-park.national-park'
+    >;
+    holiday_package: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::holiday-package.holiday-package'
     >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -1382,7 +1523,9 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::contact-us.contact-us': ApiContactUsContactUs;
       'api::enquiry.enquiry': ApiEnquiryEnquiry;
+      'api::holiday-package.holiday-package': ApiHolidayPackageHolidayPackage;
       'api::national-park.national-park': ApiNationalParkNationalPark;
       'api::package.package': ApiPackagePackage;
       'api::refferal-id.refferal-id': ApiRefferalIdRefferalId;
