@@ -61,6 +61,12 @@
     "contactInfo": {
       "type": "richtext",
       "required": true
+    },
+    "payments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::payment.payment",
+      "mappedBy": "hotel"
     }
   }
 }

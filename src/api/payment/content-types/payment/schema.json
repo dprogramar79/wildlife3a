@@ -1,0 +1,79 @@
+{
+  "kind": "collectionType",
+  "collectionName": "payments",
+  "info": {
+    "singularName": "payment",
+    "pluralName": "payments",
+    "displayName": "Payment"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "desc": {
+      "type": "string",
+      "default": "details about payment",
+      "required": true
+    },
+    "amount": {
+      "required": true,
+      "type": "integer"
+    },
+    "paymentMode": {
+      "type": "enumeration",
+      "enum": [
+        "Cash",
+        "NEFT",
+        "UPI",
+        "Check",
+        "other"
+      ],
+      "required": true
+    },
+    "paymentCreatedAt": {
+      "type": "datetime",
+      "required": true
+    },
+    "paymentFor": {
+      "type": "enumeration",
+      "enum": [
+        "Hotel",
+        "Safari",
+        "Holiday",
+        "NationalPark",
+        "other"
+      ],
+      "required": true
+    },
+    "hotel": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::hotel.hotel",
+      "inversedBy": "payments"
+    },
+    "holiday_package": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::holiday-package.holiday-package",
+      "inversedBy": "payments"
+    },
+    "national_park": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::national-park.national-park",
+      "inversedBy": "payments"
+    },
+    "safari_package": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::package.package",
+      "inversedBy": "payments"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

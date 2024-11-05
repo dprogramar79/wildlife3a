@@ -694,6 +694,7 @@ export interface ApiHolidayPackageHolidayPackage
     day3: Schema.Attribute.RichText;
     day4: Schema.Attribute.RichText;
     hotels: Schema.Attribute.Relation<'manyToMany', 'api::hotel.hotel'>;
+    payments: Schema.Attribute.Relation<'oneToMany', 'api::payment.payment'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -740,6 +741,7 @@ export interface ApiHotelHotel extends Struct.CollectionTypeSchema {
     >;
     ownerName: Schema.Attribute.String;
     contactInfo: Schema.Attribute.RichText & Schema.Attribute.Required;
+    payments: Schema.Attribute.Relation<'oneToMany', 'api::payment.payment'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -879,6 +881,7 @@ export interface ApiNationalParkNationalPark
           localized: true;
         };
       }>;
+    payments: Schema.Attribute.Relation<'oneToMany', 'api::payment.payment'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -1079,6 +1082,7 @@ export interface ApiPackagePackage extends Struct.CollectionTypeSchema {
       }> &
       Schema.Attribute.DefaultTo<'Number of Rooms : 2 Room Type(s): Deluxe Meals: Yes Number of Nights: 4(14/03/2024 to 18/03/2024)'>;
     hotels: Schema.Attribute.Relation<'manyToMany', 'api::hotel.hotel'>;
+    payments: Schema.Attribute.Relation<'oneToMany', 'api::payment.payment'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -1090,6 +1094,62 @@ export interface ApiPackagePackage extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::package.package'
+    >;
+  };
+}
+
+export interface ApiPaymentPayment extends Struct.CollectionTypeSchema {
+  collectionName: 'payments';
+  info: {
+    singularName: 'payment';
+    pluralName: 'payments';
+    displayName: 'Payment';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    desc: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'details about payment'>;
+    amount: Schema.Attribute.Integer & Schema.Attribute.Required;
+    paymentMode: Schema.Attribute.Enumeration<
+      ['Cash', 'NEFT', 'UPI', 'Check', 'other']
+    > &
+      Schema.Attribute.Required;
+    paymentCreatedAt: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    paymentFor: Schema.Attribute.Enumeration<
+      ['Hotel', 'Safari', 'Holiday', 'NationalPark', 'other']
+    > &
+      Schema.Attribute.Required;
+    hotel: Schema.Attribute.Relation<'manyToOne', 'api::hotel.hotel'>;
+    holiday_package: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::holiday-package.holiday-package'
+    >;
+    national_park: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::national-park.national-park'
+    >;
+    safari_package: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::package.package'
+    >;
+    users_permissions_user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::payment.payment'
     >;
   };
 }
@@ -1574,6 +1634,7 @@ declare module '@strapi/strapi' {
       'api::hotel.hotel': ApiHotelHotel;
       'api::national-park.national-park': ApiNationalParkNationalPark;
       'api::package.package': ApiPackagePackage;
+      'api::payment.payment': ApiPaymentPayment;
       'api::refferal-id.refferal-id': ApiRefferalIdRefferalId;
       'api::river.river': ApiRiverRiver;
       'api::term-condition.term-condition': ApiTermConditionTermCondition;

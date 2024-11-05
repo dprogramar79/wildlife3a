@@ -151,6 +151,12 @@
       "relation": "manyToMany",
       "target": "api::hotel.hotel",
       "mappedBy": "holiday_packages"
+    },
+    "payments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::payment.payment",
+      "mappedBy": "holiday_package"
     }
   }
 }

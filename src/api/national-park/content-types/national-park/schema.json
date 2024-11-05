@@ -151,6 +151,12 @@
       },
       "type": "blocks",
       "required": true
+    },
+    "payments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::payment.payment",
+      "mappedBy": "national_park"
     }
   }
 }

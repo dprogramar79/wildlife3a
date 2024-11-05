@@ -244,6 +244,12 @@
       "relation": "manyToMany",
       "target": "api::hotel.hotel",
       "mappedBy": "safari_packages"
+    },
+    "payments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::payment.payment",
+      "mappedBy": "safari_package"
     }
   }
 }
