@@ -238,6 +238,12 @@
       "type": "richtext",
       "default": "Number of Rooms : 2 Room Type(s): Deluxe Meals: Yes Number of Nights: 4(14/03/2024 to 18/03/2024)",
       "required": true
+    },
+    "hotels": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::hotel.hotel",
+      "mappedBy": "safari_packages"
     }
   }
 }

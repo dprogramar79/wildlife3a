@@ -693,6 +693,7 @@ export interface ApiHolidayPackageHolidayPackage
     day2: Schema.Attribute.RichText;
     day3: Schema.Attribute.RichText;
     day4: Schema.Attribute.RichText;
+    hotels: Schema.Attribute.Relation<'manyToMany', 'api::hotel.hotel'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -705,6 +706,49 @@ export interface ApiHolidayPackageHolidayPackage
       'oneToMany',
       'api::holiday-package.holiday-package'
     >;
+  };
+}
+
+export interface ApiHotelHotel extends Struct.CollectionTypeSchema {
+  collectionName: 'hotels';
+  info: {
+    singularName: 'hotel';
+    pluralName: 'hotels';
+    displayName: 'Hotel';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    desc: Schema.Attribute.RichText & Schema.Attribute.Required;
+    location: Schema.Attribute.String & Schema.Attribute.Required;
+    rating: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    images: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    pricing: Schema.Attribute.Integer & Schema.Attribute.Required;
+    holiday_packages: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::holiday-package.holiday-package'
+    >;
+    safari_packages: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::package.package'
+    >;
+    ownerName: Schema.Attribute.String;
+    contactInfo: Schema.Attribute.RichText & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::hotel.hotel'>;
   };
 }
 
@@ -1034,6 +1078,7 @@ export interface ApiPackagePackage extends Struct.CollectionTypeSchema {
         };
       }> &
       Schema.Attribute.DefaultTo<'Number of Rooms : 2 Room Type(s): Deluxe Meals: Yes Number of Nights: 4(14/03/2024 to 18/03/2024)'>;
+    hotels: Schema.Attribute.Relation<'manyToMany', 'api::hotel.hotel'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -1526,6 +1571,7 @@ declare module '@strapi/strapi' {
       'api::contact-us.contact-us': ApiContactUsContactUs;
       'api::enquiry.enquiry': ApiEnquiryEnquiry;
       'api::holiday-package.holiday-package': ApiHolidayPackageHolidayPackage;
+      'api::hotel.hotel': ApiHotelHotel;
       'api::national-park.national-park': ApiNationalParkNationalPark;
       'api::package.package': ApiPackagePackage;
       'api::refferal-id.refferal-id': ApiRefferalIdRefferalId;

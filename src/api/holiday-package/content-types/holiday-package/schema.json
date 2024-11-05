@@ -145,6 +145,12 @@
     },
     "day4": {
       "type": "richtext"
+    },
+    "hotels": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::hotel.hotel",
+      "mappedBy": "holiday_packages"
     }
   }
 }
