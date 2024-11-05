@@ -1159,7 +1159,7 @@ export interface ApiRefferalIdRefferalId extends Struct.CollectionTypeSchema {
   info: {
     singularName: 'refferal-id';
     pluralName: 'refferal-ids';
-    displayName: 'Refferal';
+    displayName: 'Referral';
     description: '';
   };
   options: {
