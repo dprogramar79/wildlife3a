@@ -250,6 +250,12 @@
       "relation": "oneToMany",
       "target": "api::payment.payment",
       "mappedBy": "safari_package"
+    },
+    "enquiries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::enquiry.enquiry",
+      "mappedBy": "safari_package"
     }
   }
 }

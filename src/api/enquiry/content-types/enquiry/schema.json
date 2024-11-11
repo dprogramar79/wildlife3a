@@ -51,6 +51,24 @@
       "relation": "manyToOne",
       "target": "api::holiday-package.holiday-package",
       "inversedBy": "enquiries"
+    },
+    "safari_package": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::package.package",
+      "inversedBy": "enquiries"
+    },
+    "national_park": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::national-park.national-park",
+      "inversedBy": "enquiries"
+    },
+    "hotel": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::hotel.hotel",
+      "inversedBy": "enquiries"
     }
   }
 }

@@ -67,6 +67,12 @@
       "relation": "oneToMany",
       "target": "api::payment.payment",
       "mappedBy": "hotel"
+    },
+    "enquiries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::enquiry.enquiry",
+      "mappedBy": "hotel"
     }
   }
 }

@@ -591,6 +591,15 @@ export interface ApiEnquiryEnquiry extends Struct.CollectionTypeSchema {
       'manyToOne',
       'api::holiday-package.holiday-package'
     >;
+    safari_package: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::package.package'
+    >;
+    national_park: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::national-park.national-park'
+    >;
+    hotel: Schema.Attribute.Relation<'manyToOne', 'api::hotel.hotel'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -742,6 +751,7 @@ export interface ApiHotelHotel extends Struct.CollectionTypeSchema {
     ownerName: Schema.Attribute.String;
     contactInfo: Schema.Attribute.RichText & Schema.Attribute.Required;
     payments: Schema.Attribute.Relation<'oneToMany', 'api::payment.payment'>;
+    enquiries: Schema.Attribute.Relation<'oneToMany', 'api::enquiry.enquiry'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -882,6 +892,7 @@ export interface ApiNationalParkNationalPark
         };
       }>;
     payments: Schema.Attribute.Relation<'oneToMany', 'api::payment.payment'>;
+    enquiries: Schema.Attribute.Relation<'oneToMany', 'api::enquiry.enquiry'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -1083,6 +1094,7 @@ export interface ApiPackagePackage extends Struct.CollectionTypeSchema {
       Schema.Attribute.DefaultTo<'Number of Rooms : 2 Room Type(s): Deluxe Meals: Yes Number of Nights: 4(14/03/2024 to 18/03/2024)'>;
     hotels: Schema.Attribute.Relation<'manyToMany', 'api::hotel.hotel'>;
     payments: Schema.Attribute.Relation<'oneToMany', 'api::payment.payment'>;
+    enquiries: Schema.Attribute.Relation<'oneToMany', 'api::enquiry.enquiry'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

@@ -157,6 +157,12 @@
       "relation": "oneToMany",
       "target": "api::payment.payment",
       "mappedBy": "national_park"
+    },
+    "enquiries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::enquiry.enquiry",
+      "mappedBy": "national_park"
     }
   }
 }
